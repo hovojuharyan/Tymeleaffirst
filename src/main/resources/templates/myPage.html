@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>My Page</title>
+</head>
+<body>
+<a th:href="@{/logout}">--Logout--</a><br/>
+<div style="margin-left: 750px;width: 300px">
+    <h3 th:text="${'Hi '+myself.name}">User</h3>
+    <img th:src="@{/image(fileName=${myself.picUrl})}" width="300"/>
+    <li th:text="${myself.name+' '+myself.surname}">My Name</li>
+</div>
+<br/>
+My Projects:<br/>
+<div th:each="myProject :${myProjects}"  style="width: 300px;"  th:styleappend="((${myProject.projectStatus==allStatus[2]}) ? 'background-color:red' :((${myProject.projectStatus==allStatus[1]}) ?  'background-color:green' : 'background-color:yellow')) ">
+    <h2 th:text="${myProject.title}">Title </h2>
+    <div><h4 th:text="${myProject.description}"></h4></div>
+    <!--<p th:text="${myProject.users}">userName</p>-->
+    <p th:each="user :${myProject.users}" th:text="${user.name +' '+user.surname}">No other users only you</p>
+    <p th:text="${myProject.projectStatus.name()}">Status</p>
+    <form th:action="@{/user/changeStatus(postid=${myProject.id})}"  method="post">
+        <p th:each="status1 :${allStatus}">
+        <input  type="radio"  th:value="${status1}"  name="status"/><label th:text="${status1.name()}">Status</label>
+        </p>
+        <input type="submit" value="SET"/>
+    </form>
+</div>
+</body>
+</html>

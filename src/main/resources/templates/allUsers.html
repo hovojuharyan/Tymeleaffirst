@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>ALL Users</title>
+</head>
+<body>
+<a th:href="@{/}">All Users</a>___<a th:href="@{/admin/admin}">My Page</a>___<a th:href="@{/logout}">Logout</a><br/>
+<div th:each="user1:${allUsers}">
+    <img th:src="@{/image(fileName=${user1.picUrl})}" width="300"/>
+    <a th:href="@{|/admin/singlUser/${user1.id}|}"><h2 th:text="${user1.name +' '+user1.surname}">No Users</h2></a>
+    <p th:text="${user1.userProfType}">Prof Type</p>
+</div>
+</body>
+</html>

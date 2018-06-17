@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>ADMIN PAGE</title>
+</head>
+<body>
+<a th:href="@{/}">All Users</a>___<a th:href="@{/admin/addUserPage}">Add User</a>___<a th:href="@{/logout}">Logout</a><br/>
+Add Project:<br/>
+<div id="top">
+<form th:action="@{/admin/addProject}" th:object="${project}" method="post">
+    <input type="text" th:field="*{title}"/>
+    <input type="text" th:field="*{description}"/>
+    <li th:each="user :${allUsers}">
+        <input type="checkbox" th:field="*{users}" th:value="${user.id}"/><label th:text="${user.name}" >Name</label>
+    </li>
+    <input type="submit" value="OK"/>
+</form>
+</div><br/>
+=======================================================================
+=======================================================================
+<div id="bottom">
+    <div id="left" style="width: 900px;float: left">
+        All Users:<br/>
+        <div th:each="user1 :${allUsers}" style="width: 280px">
+            <img th:src="@{/image(fileName=${user1.picUrl})}" width="200"/>
+            <a th:href="@{|/admin/singlUser/${user1.id}|}"><h2 th:text="${user1.name +' '+user1.surname}">No Users</h2></a>
+            <p th:text="${user1.userProfType}">Prof Type</p>
+        </div>
+    </div>
+    <div id="right" style="width: 900px;float: right" >
+        All Projects:<br/>
+        <div th:each="project1:${allProjects}" style="width: 280px">
+            <h2 th:text="${project1.title}">No Projects</h2>
+            <li th:each="user2:${project1.users}"  th:text="${user2.name +' '+user2.surname}">
+               No User
+            </li>
+            --------------------------------------------------
+        </div>
+    </div>
+</div>
+</body>
+</html>

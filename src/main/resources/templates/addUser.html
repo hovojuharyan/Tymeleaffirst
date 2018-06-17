@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>ADD User</title>
+</head>
+<body>
+<a th:href="@{/}">All Users</a>___<a th:href="@{/admin/admin}">My Page</a>___<a th:href="@{/logout}">Logout</a><br/>
+Add User Here:<br/>
+<form action="/addUser" th:action="@{/addUser}" th:object="${user}" method="post" enctype="multipart/form-data">
+    <input type="text" th:field="*{name}" />
+    <input type="text" th:field="*{surname}"/>
+    <input type="text" th:field="*{email}"/>
+    <input type="text" th:field="*{password}"/><br/>
+    <ul>
+        <li th:each="type :${profTypes}">
+            <input type="radio" th:field="*{userProfType}" th:value="${type}" th:text="${type.toString()}"/><br/>
+        </li>
+    </ul>
+    <br/>
+    <input type="file" name="picture"/><br/>
+    <input type="submit" th:value="SAVE"/>
+
+</form>
+
+
+</body>
+</html>

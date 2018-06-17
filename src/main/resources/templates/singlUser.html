@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${thisUser.name+' '+thisUser.surname}">Singl User</title>
+</head>
+<body>
+<a th:href="@{/user/allUserPage}">All Users</a>___<a th:href="@{/admin/admin}">My Page</a>___<a th:href="@{/admin/addUserPage}">Add User</a>___<a th:href="@{/logout}">Logout</a><br/>
+<div style="margin-left: 750px;width: 300px">
+    <img th:src="@{/image(fileName=${thisUser.picUrl})}" width="295"/>
+    <h1 th:text="${thisUser.name +'  '+thisUser.surname}">Name Surname</h1>
+    <h3 th:text="${thisUser.userProfType}">User Type</h3>
+    ======================================================
+</div>
+<br/>
+<div th:each="project1:${thisUser.projects}">
+    <h3 th:text="${project1.title}">No Project</h3>
+    <h5 th:text="${project1.projectStatus.name()}">ONLYBEGIN</h5>
+</div>
+</body>
+</html>
